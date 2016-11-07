@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: table 
+# key: tab
+# --
+#+caption: ${1:\bicaption{Heading 1}{Heading 2}} \label{tab:${2:label}}
+#+ATTR_LATEX: :mode table :booktabs center :align ${3:{@{}llp{3cm}p{3cm}r@{}}} :width ${4:1\textwidth} :environment ${5:tabular*, tabu, tabular} :float${6: multicolumn, sideways, t, nil}
+|-
+${7:|-}

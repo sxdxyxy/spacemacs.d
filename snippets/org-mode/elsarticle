@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: elsarticle
+# key: elsa
+# --
+#+include: ../head.org 
+#+latex_class: elsarticle
+#+latex_class_options:[5p] 
+#+options: title:nil author:nil
+#+title: ${1: Title} 
+#+Author: Xiaoyun Yu 
+#+BEGIN_abstract
+${2: abstract}
+#+END_abstract
+#+BEGIN_keyword
+${3: Keyword, Keyword2}
+#+END_keyword
+#+include: ../authors.org
+* Introduction
+* Methodology

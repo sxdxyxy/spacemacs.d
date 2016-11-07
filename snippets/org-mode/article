@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: article
+# key: article
+# --
+
+#+latex_class: article
+#+STARTUP: hideblocks
+#+OPTIONS: p:nil tex:t  ^:t
+#+LANGUAGE: zh_cn
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+title: ${1:title}
+#+author: 余晓云 
+#+LATEX_HEADER: \usepackage{natbib}
+#+latex_header: \usepackage{glossaries}
+#+latex_header: \makeglossaries
+#+latex_header: \usepackage[utf8]{ctex}
+#+latex_header_extra: \newglossaryentry{acronym}{name={acronym},description={An acronym is an abbreviation used as a word which is formed from the initial components in a phrase or a word. Usually these components are individual letters (as in NATO or laser) or parts of words or names (as in Benelux)}}
+#+latex_header_extra: \newacronym{tla}{TLA}{Three Letter Acronym}
+
+\maketitle
+\tableofcontents
+
+
+#+BEGIN_ABSTRACT
+${3:abstract}
+#+END_ABSTRACT
+
+* ${4:section}

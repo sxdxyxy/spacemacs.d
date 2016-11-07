@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: figure
+# key: fig
+# --
+#+CAPTION: ${1:\bicaption{Heading 1}{Heading 2}} \label{fig:${2:label}}
+#+ATTR_LaTeX: :width ${3:0.8\textwidth} :float ${4:multicolumn, sideways, wrap, t, nil} :options ${5:scale=0.75, angle=90} ${7: :placement {c}{0.4\textwidth}} 
