@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -54,7 +55,11 @@ values."
             python-enable-yapf-format-on-save t
             python-shell-completion-native-disabled-interpreters 'python 
             )
-     org
+     (org :variables
+          org-enable-github-support t
+          org-enable-reveal-js-support
+          org-enable-table-editor
+          org-projectile-file "TODO.org")
   	 extra-langs
      (chinese :variables 
               chinese-default-input-method 'wubi
@@ -386,7 +391,8 @@ you should place your code here."
 
 
   (with-eval-after-load 'ox-latex
-    (add-to-list 'org-latex-classes '("elsarticle"
+    (add-to-list 'org-latex-classes '(
+                                      ("elsarticle"
                                       "\\documentclass[review]{elsarticle}
   							[NO-DEFAULT-PACKAGES]
   							[EXTRA]"
@@ -394,7 +400,18 @@ you should place your code here."
                                       ("\\subsection{%s}" . "\\subsection*{%s}")
                                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                                       ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                                      ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+                                      ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+
+                                      ("beamer"
+                                       ,(concat "\\documentclass[presentation]{beamer}\n"
+                                                "[DEFAULT-PACKAGES]"
+                                                "[PACKAGES]"
+                                                "[EXTRA]\n")
+                                       ("\\section{%s}" . "\\section*{%s}")
+                                       ("\\subsection{%s}" . "\\subsection*{%s}")
+                                       ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+                                      )
+                 )
   (setq org-latex-pdf-process
         '(
           "xelatex -synctex=1 --shell-escape -interaction nonstopmode -output-directory %o %f"
@@ -424,7 +441,7 @@ you should place your code here."
     ("~/git/org/phd-plan.org" "~/git/org" "~/git/matching-resource/matching theory in mass concrete construction.org")))
  '(package-selected-packages
    (quote
-    (graphviz-dot-mode company yasnippet auto-complete openwith git-gutter-fringe+ git-gutter-fringe fringe-helper flyspell-correct-ivy flycheck-pos-tip counsel-projectile counsel wolfram-mode wgrep thrift stan-mode smex scad-mode qml-mode matlab-mode julia-mode ivy-hydra git-gutter+ git-gutter flyspell-correct flycheck diff-hl swiper auto-dictionary arduino-mode zenburn-theme yapfify xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org sql-indent spacemacs-theme spaceline solarized-theme shell-pop restart-emacs request rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox pangu-spacing pandoc-mode ox-pandoc org-ref org-projectile org-present org-pomodoro org-plus-contrib org-page org-download org-bullets open-junk-file neotree mwim multi-term move-text monokai-theme mmm-mode markdown-toc magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint latex-preview-pane info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot github-search github-clone github-browse-file gist gh-md flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump define-word cython-mode company-statistics company-quickhelp company-auctex company-anaconda column-enforce-mode clean-aindent-mode chinese-wbim cal-china-x boxquote bbdb auto-yasnippet auto-highlight-symbol auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell))))
+    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode haml-mode emmet-mode company-web web-completion-data ox-reveal graphviz-dot-mode company yasnippet auto-complete openwith git-gutter-fringe+ git-gutter-fringe fringe-helper flyspell-correct-ivy flycheck-pos-tip counsel-projectile counsel wolfram-mode wgrep thrift stan-mode smex scad-mode qml-mode matlab-mode julia-mode ivy-hydra git-gutter+ git-gutter flyspell-correct flycheck diff-hl swiper auto-dictionary arduino-mode zenburn-theme yapfify xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org sql-indent spacemacs-theme spaceline solarized-theme shell-pop restart-emacs request rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox pangu-spacing pandoc-mode ox-pandoc org-ref org-projectile org-present org-pomodoro org-plus-contrib org-page org-download org-bullets open-junk-file neotree mwim multi-term move-text monokai-theme mmm-mode markdown-toc magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint latex-preview-pane info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot github-search github-clone github-browse-file gist gh-md flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump define-word cython-mode company-statistics company-quickhelp company-auctex company-anaconda column-enforce-mode clean-aindent-mode chinese-wbim cal-china-x boxquote bbdb auto-yasnippet auto-highlight-symbol auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
