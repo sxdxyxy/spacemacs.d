@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: tablelinenumber 
+# key: tbline
+# --
+#+TBLFM: \$1=vlen(@I\$1..0); EN

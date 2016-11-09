@@ -7,29 +7,34 @@
 #+LATEX_HEADER: \subject{${3:subject}}
 #+AUTHOR: 余晓云
 #+EMAIL:  sxdxyxy@gmail.com
-#+LATEX_HEADER: \institute[三峡大学]{三峡大学水利与环境学院} 
-#+OPTIONS: H:2 num:t toc:1 \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+beamer_theme: ${4:Madrid, CambridgeUS}
+#+LATEX_HEADER: \institute[三峡大学]{三峡大学水利与环境学院\\\url{http://hecm.ctgu.edu.cn}}
+#+BEAMER_HEADER: \logo{\includegraphics[height=.9cm]{InstLogo}}
+#+LaTeX_CLASS_options: [allowframebreaks]
+#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/
+#+OPTIONS: num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+beamer_theme: ${4:Madrid, CambridgeUS, Darmstadt,AnnArbor, Antibes, Bergen, Berkeley}
+# visit website: http://deic.uab.es/~iblanes/beamer_gallery/index.html
 #+OPTIONS: TeX:t LaTeX:nil skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+startup: beamer
 #+LaTeX_CLASS: beamer
+#+latex_header: \usepackage{listings}
+#+latex_header: \usepackage{xcolor}
+#+LaTeX_HEADER: \usepackage[utf8]{ctex}
 #+LaTeX_CLASS_OPTIONS: [${5:bigger, presentation}]
 #+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
 #+BEAMER_FRAME_LEVEL: ${6:2}
 #+LaTeX_HEADER: \AtBeginSection{\begin{frame}{${7:Outline, 提纲}}   \tableofcontents[currentsection] \end{frame} }
-#+LaTeX_HEADER: \setbeamertemplate{navigation symbols}{}
 #+LaTeX_HEADER: \renewcommand\maketitle{\frame[plain]{\titlepage}}
 #+LaTeX_HEADER: \usepackage{fontspec}
-#+LaTeX_HEADER: \usepackage{xeCJK}
-#+LaTeX_HEADER: \setmainfont{Times New Roman}
-#+LaTeX_HEADER: \setsansfont{Arial}
-#+LaTeX_HEADER: \setmonofont{Courier Std}
-#+LaTeX_HEADER: \setCJKmainfont[BoldFont={ },ItalicFont={ }]{WenQuanYi Micro Hei}
-#+LaTeX_HEADER: \setCJKsansfont{WenQuanYi Micro Hei}
-#+LaTeX_HEADER: \setCJKmonofont{WenQuanYi Micro Hei Mono} 
+# #+LaTeX_HEADER: \setmainfont{Times New Roman}
+# #+LaTeX_HEADER: \setsansfont{Arial}
+# #+LaTeX_HEADER: \setmonofont{Courier Std}
+# #+LaTeX_HEADER: \setCJKmainfont[BoldFont={ },ItalicFont={ }]{WenQuanYi Micro Hei}
+# #+LaTeX_HEADER: \setCJKsansfont{WenQuanYi Micro Hei}
+# #+LaTeX_HEADER: \setCJKmonofont{WenQuanYi Micro Hei Mono} 
 #+LaTeX_HEADER: \graphicspath{{figures/}}
 #+BEAMER_HEADER: %\logo{\includegraphics[height=5mm]{logo.png}}
 #+LaTeX_HEADER: \usepackage[backend = biber, natbib=true, style = science, sorting = none]{biblatex}
