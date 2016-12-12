@@ -47,9 +47,9 @@ values."
      graphviz
      ivy
      better-defaults
+     osx 
      emacs-lisp
      github
-     gnus
      markdown
      (python :variables 
             python-enable-yapf-format-on-save t
@@ -66,19 +66,14 @@ values."
             ;;  chinese-enable-youdao-dict t
               )
      latex
-     ;;java
-     ;;scheme
      sql
      pandoc
-	   ;;smex
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
-	   ;;gtd
-     ;myorg
      (bibtex :variables
              bibtex-completion-pdf-field "file"
              org-ref-default-bibliography 'org-ref-ivy-cite
@@ -92,8 +87,6 @@ values."
              ;;org-ref-default-bibliography "~/git/pdf/fishway/fishway.bib"
              org-ref-default-bibliography "~/git/pdfs/ResourcesMatching/Matching.bib"
             )
-     ;;elpy
-     ;; han	 
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -146,7 +139,7 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'hybrid
+   dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -362,12 +355,12 @@ you should place your code here."
 
 ;; 解决org mode下表格中中英文不对齐的问题
   ;; 英文字体
-  (set-face-attribute 'default nil :font "Consolas 11")
+  ;; (set-face-attribute 'default nil :font "Consolas 11")
   ;; 中文字体
-  (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font)
-                      charset
-                      (font-spec :family "Microsoft Yahei" :size 16)))
+  ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+  ;; (set-fontset-font (frame-parameter nil 'font)
+  ;;                  charset
+  ;;                 (font-spec :family "Microsoft Yahei" :size 16)))
   ;;(require 'cal-china-x)
   
   (defun my/org-ref-open-pdf-at-point ()
@@ -408,11 +401,10 @@ you should place your code here."
                                        ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
   (setq org-latex-pdf-process
         '(
-          "xelatex -synctex=1 --shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -synctex=1 -interaction nonstopmode -output-directory %o %f"
           "bibtex  %b"
           "xelatex -synctex=1 -interaction nonstopmode -output-directory %o %f"
           "xelatex -synctex=1 -interaction nonstopmode -output-directory %o %f"
-          "del /f/q  %b.out %b.log %b.tex auto"
           ))
    (setq org-latex-default-class "ctexart")
    (setq org-latex-listings t))
@@ -425,17 +417,12 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(openwith-associations
-   (quote
-    ((".pdf" "C:\\Program Files\\Tracker Software\\PDF Viewer\\PDFXCview.exe"
-      (file)))))
- '(openwith-mode t)
  '(org-agenda-files
    (quote
     ("~/git/org/phd-plan.org" "~/git/org" "~/git/matching-resource/matching theory in mass concrete construction.org")))
  '(package-selected-packages
    (quote
-    (auto-org-md ox-gfm web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode haml-mode emmet-mode company-web web-completion-data ox-reveal graphviz-dot-mode company yasnippet auto-complete openwith git-gutter-fringe+ git-gutter-fringe fringe-helper flyspell-correct-ivy flycheck-pos-tip counsel-projectile counsel wolfram-mode wgrep thrift stan-mode smex scad-mode qml-mode matlab-mode julia-mode ivy-hydra git-gutter+ git-gutter flyspell-correct flycheck diff-hl swiper auto-dictionary arduino-mode zenburn-theme yapfify xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org sql-indent spacemacs-theme spaceline solarized-theme shell-pop restart-emacs request rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox pangu-spacing pandoc-mode ox-pandoc org-ref org-projectile org-present org-pomodoro org-plus-contrib org-page org-download org-bullets open-junk-file neotree mwim multi-term move-text monokai-theme mmm-mode markdown-toc magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint latex-preview-pane info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot github-search github-clone github-browse-file gist gh-md flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump define-word cython-mode company-statistics company-quickhelp company-auctex company-anaconda column-enforce-mode clean-aindent-mode chinese-wbim cal-china-x boxquote bbdb auto-yasnippet auto-highlight-symbol auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ace-jump-helm-line ac-ispell))))
+    (counsel-projectile auctex-latexmk yapfify xterm-color ws-butler wolfram-mode window-numbering which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org thrift tagedit stan-mode sql-indent spacemacs-theme spaceline smex slim-mode shell-pop scss-mode scad-mode sass-mode reveal-in-osx-finder restart-emacs request rainbow-delimiters quelpa qml-mode pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy paradox pangu-spacing pandoc-mode ox-reveal ox-pandoc ox-gfm osx-trash osx-dictionary org-ref org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets openwith open-junk-file neotree mwim multi-term move-text mmm-mode matlab-mode markdown-toc magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode launchctl julia-mode ivy-hydra info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make graphviz-dot-mode google-translate golden-ratio gnuplot github-search github-clone github-browse-file git-gutter-fringe git-gutter-fringe+ gist gh-md flyspell-correct-ivy flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump diff-hl cython-mode counsel company-web company-statistics company-auctex company-anaconda column-enforce-mode clean-aindent-mode chinese-wbim auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile arduino-mode aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
