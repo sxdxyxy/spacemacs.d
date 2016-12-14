@@ -31,41 +31,46 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     html
-     ;; ----------------------------------------------------------------
+    ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-    ;; pdf-tools
+     ;; pdf-tools
+     html
+     (python
+       :variables
+       python-shell-completion-native-enable nil
+       python-enable-yapf-format-on-save t
+      ;;python-shell-completion-native-disabled-interpreters 'python
+     )
+     ipython-notebook
      (auto-completion
-                     :variables
-                     auto-completion-enable-snippets-in-popup t
-                     ;; auto-completion-enable-help-tooltip t
-                     auto-completion-enable-sort-by-usage t
-                     )
+                   :variables
+                   auto-completion-enable-snippets-in-popup t
+                   auto-completion-enable-help-tooltip t
+                   auto-completion-enable-sort-by-usage t
+                   )
      graphviz
      ivy
+     ipython-notebook
      better-defaults
-     osx 
+     ;;osx 
      emacs-lisp
      github
      markdown
-     (python :variables 
-            python-enable-yapf-format-on-save t
-            python-shell-completion-native-disabled-interpreters 'python 
-            )
      (org :variables
           org-enable-github-support t
           org-enable-reveal-js-support t
           org-enable-table-editor t
+          org-startup-with-inline-images t
           org-projectile-file "TODO.org")
   	 extra-langs
      (chinese :variables 
               chinese-default-input-method 'wubi
             ;;  chinese-enable-youdao-dict t
               )
-     latex
+     (latex)
      sql
      pandoc
      (shell :variables
@@ -75,8 +80,8 @@ values."
      syntax-checking
      version-control
      (bibtex :variables
-             bibtex-completion-pdf-field "file"
-             org-ref-default-bibliography 'org-ref-ivy-cite
+            bibtex-completion-pdf-field "file"
+            ;; org-ref-default-bibliography 'org-ref-ivy-cite
             ;; bibtex-completion-bibliography "~/git/pdfs/fishway/fishway.bib"
              bibtex-completion-bibliography "~/git/pdfs/ResourcesMatching/Matching.bib"
              bibtex-completion-library-path "~/git/pdfs/fishway"
@@ -85,14 +90,14 @@ values."
              bibtex-completion-notes "~/git/article-note.org"
              org-ref-pdf-directory "~/git/pdfs/fishway"
              ;;org-ref-default-bibliography "~/git/pdf/fishway/fishway.bib"
-             org-ref-default-bibliography "~/git/pdfs/ResourcesMatching/Matching.bib"
-            )
+            org-ref-default-bibliography "~/git/pdfs/ResourcesMatching/Matching.bib"
+           )
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(openwith)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -104,7 +109,7 @@ values."
    ;; `used-but-keep-unused' installs only the used packages but won't uninstall
    ;; them if they become unused. `all' installs *all* packages supported by
    ;; Spacemacs and never uninstall them. (default is `used-only')
-   dotspacemacs-install-packages 'used-only))
+   dotspacemacs-install-packages 'used-but-keep-unused))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -128,7 +133,7 @@ values."
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
-   dotspacemacs-check-for-update nil
+   dotspacemacs-check-for-update t
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
    ;; to `emacs-version'.
@@ -139,9 +144,10 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
-   dotspacemacs-verbose-loading nil
+   dotspacemacs-verbose-loading t 
+   
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
    ;; banner, `random' chooses a random text banner in `core/banners'
@@ -340,9 +346,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
          ("gnu-cn" . "elpa.zilongshanren.com/gnu/")))
 
  ;;set python anaconda completion
- (add-hook 'python-mode-hook
-           (lambda ()
-             (set (make-local-variable 'company-backends) '(company-anaconda))))
+ ;;(add-hook 'python-mode-hook
+   ;;        (lambda ()
+     ;;        (set (make-local-variable 'company-backends) '(company-anaconda))))
 )
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -419,10 +425,10 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/git/org/phd-plan.org" "~/git/org" "~/git/matching-resource/matching theory in mass concrete construction.org")))
+    ("~/git/org/phd-plan.org" "/Users/daniel/git/org/award-work-plan.org" "/Users/daniel/git/org/diary.org" "/Users/daniel/git/org/notes.org" "/Users/daniel/git/org/phd-plan.org" "/Users/daniel/git/org/refile.org" "/Users/daniel/git/org/todo.org" "/Users/daniel/git/org/work.org")))
  '(package-selected-packages
    (quote
-    (counsel-projectile auctex-latexmk yapfify xterm-color ws-butler wolfram-mode window-numbering which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org thrift tagedit stan-mode sql-indent spacemacs-theme spaceline smex slim-mode shell-pop scss-mode scad-mode sass-mode reveal-in-osx-finder restart-emacs request rainbow-delimiters quelpa qml-mode pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy paradox pangu-spacing pandoc-mode ox-reveal ox-pandoc ox-gfm osx-trash osx-dictionary org-ref org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets openwith open-junk-file neotree mwim multi-term move-text mmm-mode matlab-mode markdown-toc magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode launchctl julia-mode ivy-hydra info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make graphviz-dot-mode google-translate golden-ratio gnuplot github-search github-clone github-browse-file git-gutter-fringe git-gutter-fringe+ gist gh-md flyspell-correct-ivy flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump diff-hl cython-mode counsel company-web company-statistics company-auctex company-anaconda column-enforce-mode clean-aindent-mode chinese-wbim auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile arduino-mode aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ac-ispell))))
+    (stickyfunc-enhance srefactor ein websocket company-quickhelp powerline spinner hydra parent-mode helm helm-core flx org-ref swiper key-chord ivy org alert log4e gntp markdown-mode helm-bibtex parsebib haml-mode magit magit-popup fringe-helper git-gutter+ git-commit with-editor git-gutter gh marshal logito pcache ht flyspell-correct pos-tip flycheck web-completion-data company biblio biblio-core yasnippet auctex anaconda-mode pythonic pinyinlib ace-jump-mode auto-complete define-word helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag flyspell-correct-helm ace-jump-helm-line counsel-projectile auctex-latexmk yapfify xterm-color ws-butler wolfram-mode window-numbering which-key wgrep web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toc-org thrift tagedit stan-mode sql-indent spacemacs-theme spaceline smex slim-mode shell-pop scss-mode scad-mode sass-mode reveal-in-osx-finder restart-emacs request rainbow-delimiters quelpa qml-mode pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el pbcopy paradox pangu-spacing pandoc-mode ox-reveal ox-pandoc ox-gfm osx-trash osx-dictionary org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets openwith open-junk-file neotree mwim multi-term move-text mmm-mode matlab-mode markdown-toc magit-gh-pulls macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode launchctl julia-mode ivy-hydra info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make graphviz-dot-mode google-translate golden-ratio gnuplot github-search github-clone github-browse-file git-gutter-fringe git-gutter-fringe+ gist gh-md flyspell-correct-ivy flycheck-pos-tip flx-ido find-by-pinyin-dired fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump diff-hl cython-mode counsel company-web company-statistics company-auctex company-anaconda column-enforce-mode clean-aindent-mode chinese-wbim auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile arduino-mode aggressive-indent adaptive-wrap ace-window ace-pinyin ace-link ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
